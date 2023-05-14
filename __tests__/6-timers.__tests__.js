@@ -40,7 +40,7 @@ test('watch 2', (done) => {
 
 test('watch 3', (done) => {
   const finish = ensureDone(done);
-  const id = watch('/etc/hosts', 250, () => {
+  const id = watch('__tests__/etc/hosts', 100, () => {
     expect(true).toBe(false);
   });
   setTimeout(() => {

@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 // BEGIN
-export function stalker (filepath, interval, callback) {
+/*export function stalker (filepath, interval, callback) {
 
     let lastCheckTime = Date.now();
   
@@ -28,3 +28,22 @@ export function stalker (filepath, interval, callback) {
 
   export default stalker;
 // END
+*/
+export default watch = (filepath, interval, cb) => {
+    let lastCheck = Date.now();
+    const timer = setInterval(() => {
+        fs.stat(filepath, (err, stats) => {
+            if (err) {
+                clearInterval(timer);
+                cb(err);
+                return;
+            }
+            if (stats.mtimeMs > lastCheck) {
+                lastCheck = stats.mtimeMs;
+                cb(null);
+            }
+        });
+    }, interval);
+
+    return timer;
+};

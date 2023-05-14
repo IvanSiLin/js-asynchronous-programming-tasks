@@ -7,7 +7,7 @@ const reverseLines = (data) => data.split('\n').reverse().join('\n');
 test('reverse 1', async () => {
   const exampleFilePath = path.resolve(process.cwd(), '__fixtures__/example');
   const content = await fsp.readFile(exampleFilePath, 'utf-8');
-  const filepath = '/tmp/example';
+  const filepath = '__tests__/tmp/example';
   await fsp.writeFile(filepath, content);
 
   const expected = reverseLines(content);
